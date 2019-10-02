@@ -1,5 +1,6 @@
-package demo.eventsourcing
+package demo.eventsourcing.api
 
+import demo.eventsourcing.CurrencyAmount
 import org.springframework.web.bind.annotation.*
 import java.util.concurrent.CompletableFuture
 

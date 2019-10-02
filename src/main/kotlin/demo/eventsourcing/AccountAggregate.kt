@@ -71,7 +71,11 @@ class AccountAggregate(
     }
 
     private fun handleMoneyCreditedEvent(event: MoneyCreditedEvent) {
-        if (this.status == Status.HELD && this.accountBalance + event.creditAmount > 0.0) {
+        if (currency != event.currency) {
+            throw IncompatibleCurrencyException("Credits can only be made in $currency, not ${event.currency}.")
+        }
+
+        if (this.status == Status.HELD && this.accountBalance + event.creditAmount >= 0.0) {
             apply(AccountActivatedEvent(event.id))
         }
 
@@ -79,6 +83,14 @@ class AccountAggregate(
     }
 
     private fun handleMoneyDebitedEvent(event: MoneyDebitedEvent) {
+        if (currency != event.currency) {
+            throw IncompatibleCurrencyException("Debits can only be made in $currency, not ${event.currency}.")
+        }
+
+        if (this.status == Status.HELD) {
+            throw InsufficientFundsException("Sorry, your account is currently $accountBalance in deficit. Please add more funds.")
+        }
+
         if (this.accountBalance - event.debitAmount < 0.0) {
             apply(AccountHeldEvent(event.id))
         }

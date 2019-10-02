@@ -1,4 +1,4 @@
-package demo.eventsourcing
+package demo.eventsourcing.api
 
 import org.axonframework.eventsourcing.eventstore.EventStore
 import org.springframework.stereotype.Service

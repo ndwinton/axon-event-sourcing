@@ -1,7 +1,7 @@
 package test.eventsourcing
 
-import demo.eventsourcing.AccountCommandController
-import demo.eventsourcing.AccountCommandService
+import demo.eventsourcing.api.AccountCommandController
+import demo.eventsourcing.api.AccountCommandService
 import demo.eventsourcing.CurrencyAmount
 import spock.lang.Specification
 

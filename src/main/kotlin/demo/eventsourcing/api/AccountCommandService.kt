@@ -1,5 +1,6 @@
-package demo.eventsourcing
+package demo.eventsourcing.api
 
+import demo.eventsourcing.CurrencyAmount
 import java.util.concurrent.CompletableFuture
 
 interface AccountCommandService {

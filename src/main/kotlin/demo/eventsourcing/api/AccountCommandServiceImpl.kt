@@ -1,5 +1,9 @@
-package demo.eventsourcing
+package demo.eventsourcing.api
 
+import demo.eventsourcing.CreateAccountCommand
+import demo.eventsourcing.CreditMoneyCommand
+import demo.eventsourcing.CurrencyAmount
+import demo.eventsourcing.DebitMoneyCommand
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.stereotype.Service
 import java.util.*
@@ -9,11 +13,11 @@ import java.util.concurrent.CompletableFuture
 class AccountCommandServiceImpl(val commandGateway: CommandGateway) : AccountCommandService {
     override fun createAccount(startingBalance: CurrencyAmount): CompletableFuture<String> =
          commandGateway.send(
-            CreateAccountCommand(
-                UUID.randomUUID().toString(),
-                startingBalance.amount,
-                startingBalance.currency
-            )
+             CreateAccountCommand(
+                 UUID.randomUUID().toString(),
+                 startingBalance.amount,
+                 startingBalance.currency
+             )
         )
 
     override fun creditMoneyToAccount(accountNumber: String, amount: CurrencyAmount): CompletableFuture<String> =
