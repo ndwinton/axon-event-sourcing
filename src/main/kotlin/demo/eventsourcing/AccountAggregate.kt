@@ -1,5 +1,6 @@
 package demo.eventsourcing
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.modelling.command.AggregateIdentifier
@@ -15,8 +16,8 @@ class AccountAggregate(
     var accountBalance: Double = 0.0,
     var currency: String = "???",
     var status: Status = Status.UNKNOWN,
+    @JsonIgnore // This property is only here to allow injection for unit tests
     var apply: (obj: Any) -> ApplyMore = AggregateLifecycle::apply
-
 ) {
 
     @CommandHandler
